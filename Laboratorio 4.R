@@ -5,9 +5,7 @@ install.packages("qdap")
 install.packages("wordcloud")
 install.packages("RWeka")
 
-library(quanteda)
 library(readtext)
-library(devtools)
 library(tm)
 library(qdap)
 library(wordcloud)
@@ -21,32 +19,32 @@ blogs <- readLines("C:/Users/jcmen/Desktop/DataScience/Lab4/txt/en_US.blogs.txt"
 news <- readLines("C:/Users/jcmen/Desktop/DataScience/Lab4/txt/en_US.news.txt")
 twitter <- readLines("C:/Users/jcmen/Desktop/DataScience/Lab4/txt/en_US.twitter.txt")
 
-#Tamaño del archivo
+#TamaÃ±o del archivo
 round(file.info("C:/Users/jcmen/Desktop/DataScience/Lab4/txt/en_US.blogs.txt")$size/1024^2, 1)
-# conteo de líneas
+# conteo de lÃ­neas
 length(blogs)
 #Recuento de palabras
 sum(sapply(strsplit(blogs, "\\s+"), length))
-# Media de las palabras*línea
+# Media de las palabras*lÃ­nea
 mean(sapply(strsplit(blogs, "\\s+"), length))
 
-#Tamaño del archivo
+#TamaÃ±o del archivo
 round(file.info("C:/Users/jcmen/Desktop/DataScience/Lab4/txt/en_US.news.txt")$size/1024^2, 1)
 # conteo de lineas
 length(news)
 #Recuento de palabras
 sum(sapply(strsplit(news, "\\s+"), length))
-# Media de las palabras*línea
+# Media de las palabras*lÃ­nea
 mean(sapply(strsplit(news, "\\s+"), length))
 
 
-#Tamaño del archivo
+#TamaÃ±o del archivo
 round(file.info("C:/Users/jcmen/Desktop/DataScience/Lab4/txt/en_US.twitter.txt")$size/1024^2, 1)
-# Conteo de líneas
+# Conteo de lÃ­neas
 length(twitter)
 #Recuento de palabras
 sum(sapply(strsplit(twitter, "\\s+"), length))
-# Media de las palabras*línea
+# Media de las palabras*lÃ­nea
 mean(sapply(strsplit(twitter, "\\s+"), length))
 
 
@@ -76,7 +74,7 @@ freqTerms <- findFreqTerms(uniGramMatrix, lowfreq = 500)
 termFrequency <- rowSums(as.matrix(uniGramMatrix[freqTerms,]))
 termFrequency <- data.frame(unigram=names(termFrequency), frequency=termFrequency)
 
-#gráfica de la frecuencia de una sola palabra
+#grÃ¡fica de la frecuencia de una sola palabra
 ggplot(termFrequency[1:30,], aes(x=reorder(unigram, -frequency), y=frequency)) +
   labs(x = "Unigrams", y = "Frequency", title = "Most Frequent Unigrams") +
   theme(axis.text.x = element_text(angle = 60, size = 12, hjust = 1)) +
@@ -87,7 +85,7 @@ freqTerms <- findFreqTerms(biGramMatrix, lowfreq = 10)
 termFrequency <- rowSums(as.matrix(biGramMatrix[freqTerms,]))
 termFrequency <- data.frame(bigram=names(termFrequency), frequency=termFrequency)
 
-#Gráfica de la frecuencia de dos palabras
+#GrÃ¡fica de la frecuencia de dos palabras
 ggplot(termFrequency[1:30,], aes(x=reorder(bigram, -frequency), y=frequency)) +
   labs(x = "Bigrams", y = "Frequency", title = "Most Frequent Bigrams") +
   theme(axis.text.x = element_text(angle = 60, size = 12, hjust = 1)) +
