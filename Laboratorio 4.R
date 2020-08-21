@@ -76,9 +76,9 @@ termFrequency <- data.frame(unigram=names(termFrequency), frequency=termFrequenc
 
 #gráfica de la frecuencia de una sola palabra
 ggplot(termFrequency[1:30,], aes(x=reorder(unigram, -frequency), y=frequency)) +
-  labs(x = "Unigrams", y = "Frequency", title = "Most Frequent Unigrams") +
+  labs(x = "Unigramas", y = "Frecuencia", title = "Frecuencia de Unigramas") +
   theme(axis.text.x = element_text(angle = 60, size = 12, hjust = 1)) +
-  geom_bar(stat = "identity", fill = "#6699CC")
+  geom_bar(stat = "identity", fill = "56E709")
 
 #Bigrama
 freqTerms <- findFreqTerms(biGramMatrix, lowfreq = 10)
@@ -87,8 +87,8 @@ termFrequency <- data.frame(bigram=names(termFrequency), frequency=termFrequency
 
 #Gráfica de la frecuencia de dos palabras
 ggplot(termFrequency[1:30,], aes(x=reorder(bigram, -frequency), y=frequency)) +
-  labs(x = "Bigrams", y = "Frequency", title = "Most Frequent Bigrams") +
+  labs(x = "Bigramas", y = "Frecuencia", title = "Frecuecia de bigramas") +
   theme(axis.text.x = element_text(angle = 60, size = 12, hjust = 1)) +
-  geom_bar(stat = "identity", fill = "#FFFF66")
+  geom_bar(stat = "identity", fill = "#FF3D13")
 
 
