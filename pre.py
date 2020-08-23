@@ -1,6 +1,10 @@
 import re
 from nltk.corpus import stopwords
 import nltk
+import random
+import numpy as np
+import pandas as pd
+from collections import Counter, defaultdict
 # nltk.download('all')
 stopwords=set(stopwords.words('english'))
 ############################################Carga de datos############################################
@@ -71,3 +75,43 @@ for i in news4:
             newL.append(j)
     news5.append(' '.join(newL))
 print("Stopwords terminada")
+############################################Trigrama Limpio############################################
+def calc_3gram(data):
+    
+    n_gram = []
+    
+    for tmp_data in data:
+        last = ""
+        p_last = ""
+        for wn in tmp_data.split():
+            if p_last == "":
+                p_last = wn
+                continue
+            elif last == "":
+                last = p_last
+                p_last = wn
+                continue
+                
+            n_gram.append((last, p_last, wn))
+            last = p_last
+            p_last = wn
+
+    return n_gram
+
+AllData = tweets5 + news5 + blogs5
+porcentage = 0.5
+length = len(AllData)
+cut = int(length*porcentage)
+
+subsection = AllData[:cut]
+n3_gram = calc_3gram(subsection)
+print("Trigrama terminado")
+############################################Probabilidad de ocurrencia############################################
+prob = defaultdict(lambda: defaultdict(lambda: 0))
+for i,j,k in n3_gram:
+    prob[(i,j)][k] +=1
+for i,j in prob:
+    proT=float(sum(prob[(i,j)].values()))
+    for k in prob[(i,j)]:
+        prob[(i,j)][k] /= proT    
+print(dict(prob))
